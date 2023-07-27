@@ -191,6 +191,14 @@
     </div>
   </div>
   <!-- end top product -->
-
-  <div class="pt-8"></div>
 </template>
+
+<script setup>
+import { useHomeStore } from "@/stores/home_store";
+
+const homeStore = useHomeStore();
+
+homeStore.getProduct();
+
+console.log("Test " + homeStore.product);
+</script>
