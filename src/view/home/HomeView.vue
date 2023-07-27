@@ -201,4 +201,5 @@ const homeStore = useHomeStore();
 homeStore.getProduct();
 
 console.log("Test " + homeStore.product);
+s;
 </script>
