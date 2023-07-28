@@ -98,108 +98,58 @@
   <!-- top product -->
   <div class="container mx-auto mt-8">
     <h1 class="font-bold text-2xl mx-5 md:mx-0">Produk Populer</h1>
-    <div
-      class="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-5 md:mx-0"
-    >
-      <div class="border-2 border-borderColor p-4 rounded-2xl">
-        <div class="bg-bgColor p-2 flex justify-center rounded-2xl">
-          <img src="../../assets/image/product1.png" class="h-48" />
-        </div>
 
-        <div class="mt-3">
-          <p class="font-light text-borderColor text-base">Celana</p>
-          <p class="font-light text-2xl">Celana Pria 23</p>
-        </div>
+    <div v-if="homeStore.isLoading">
+      <LoaderView />
+    </div>
 
-        <div class="mt-3">
-          <p class="font-bold text-xl">Rp. 125.000</p>
-          <div class="flex">
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star-hide.svg" />
-          </div>
-        </div>
-      </div>
-
-      <div class="border-2 border-borderColor p-4 rounded-2xl">
-        <div class="bg-bgColor p-2 flex justify-center rounded-2xl">
-          <img src="../../assets/image/product2.png" class="h-48" />
-        </div>
-
-        <div class="mt-3">
-          <p class="font-light text-borderColor text-base">Celana</p>
-          <p class="font-light text-2xl">Celana Pria 23</p>
-        </div>
-
-        <div class="mt-3">
-          <p class="font-bold text-xl">Rp. 125.000</p>
-          <div class="flex">
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star-hide.svg" />
-          </div>
-        </div>
-      </div>
-
-      <div class="border-2 border-borderColor p-4 rounded-2xl">
-        <div class="bg-bgColor p-2 flex justify-center rounded-2xl">
-          <img src="../../assets/image/product3.png" class="h-48" />
-        </div>
-
-        <div class="mt-3">
-          <p class="font-light text-borderColor text-base">Celana</p>
-          <p class="font-light text-2xl">Celana Pria 23</p>
-        </div>
-
-        <div class="mt-3">
-          <p class="font-bold text-xl">Rp. 125.000</p>
-          <div class="flex">
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star-hide.svg" />
-          </div>
-        </div>
-      </div>
-
-      <div class="border-2 border-borderColor p-4 rounded-2xl">
-        <div class="bg-bgColor p-2 flex justify-center rounded-2xl">
-          <img src="../../assets/image/product2.png" class="h-48" />
-        </div>
-
-        <div class="mt-3">
-          <p class="font-light text-borderColor text-base">Celana</p>
-          <p class="font-light text-2xl">Celana Pria 23</p>
-        </div>
-
-        <div class="mt-3">
-          <p class="font-bold text-xl">Rp. 125.000</p>
-          <div class="flex">
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star.svg" />
-            <img src="../../assets/image/star-hide.svg" />
-          </div>
+    <div v-else>
+      <div
+        class="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-5 md:mx-0"
+      >
+        <div v-for="product in homeStore.topProduct">
+          <router-link :to="'/detail-product/' + product.id">
+            <ItemProduct v-bind:item="product" />
+          </router-link>
         </div>
       </div>
     </div>
   </div>
   <!-- end top product -->
+
+  <!-- all product -->
+  <div class="container mx-auto mt-8">
+    <h1 class="font-bold text-2xl mx-5 md:mx-0">Semua Produk</h1>
+
+    <div v-if="homeStore.isLoading">
+      <LoaderView />
+    </div>
+
+    <div v-else>
+      <div v-bind:ref="homeStore.scrollComponent">
+        <div
+          class="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-5 md:mx-0"
+        >
+          <div v-for="product in homeStore.allProduct">
+            <router-link :to="'/detail-product/' + product.id">
+              <ItemProduct v-bind:item="product" />
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-if="homeStore.isLoadingNext" class="mt-4">
+      <LoaderView />
+    </div>
+  </div>
+  <!-- end all product -->
 </template>
 
 <script setup>
 import { useHomeStore } from "@/stores/home_store";
+import LoaderView from "@/components/LoadingView.vue";
+import ItemProduct from "@/components/ItemProduct.vue";
 
 const homeStore = useHomeStore();
-
-homeStore.getProduct();
-
-console.log("Test " + homeStore.product);
-s;
 </script>

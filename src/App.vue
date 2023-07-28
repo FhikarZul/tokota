@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <NavBar />
-    <router-view />
-    <Footer />
+    <div class="flex flex-col justify-between">
+      <NavBar />
+      <router-view />
+      <spacher></spacher>
+      <Footer />
+    </div>
   </div>
 </template>
 
