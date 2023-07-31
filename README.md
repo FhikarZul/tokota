@@ -4,4 +4,9 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 
 - Axios (http)
 - Pinia (state management)
-- UI (tailwind)
+- Tailwind (ui)
+- vue-router (Router)
+
+# Setup Vue with Vite + Tailwind
+
+https://www.sanity.io/guides/tailwind-css-with-vue-js
