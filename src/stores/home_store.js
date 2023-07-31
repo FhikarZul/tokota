@@ -1,6 +1,6 @@
 import { ref, onBeforeMount } from "vue";
 import { defineStore } from "pinia";
-import productDataSource from "../data/product_data_source";
+import productDataSource from "../data/remote/product_remote_data_source";
 
 export const useHomeStore = defineStore("homeStore", () => {
   const topProduct = ref([]);
