@@ -2,6 +2,7 @@ import { ref, onBeforeMount } from "vue";
 import { defineStore } from "pinia";
 import productDataSource from "../data/remote/product_remote_data_source";
 
+// this is state management for home view
 export const useHomeStore = defineStore("homeStore", () => {
   const topProduct = ref([]);
   const allProduct = ref([]);
@@ -16,6 +17,7 @@ export const useHomeStore = defineStore("homeStore", () => {
     getAllProduct();
   });
 
+  //lazy load
   window.onscroll = () => {
     let bottomOfWindow =
       document.documentElement.scrollTop + window.innerHeight ==
@@ -30,6 +32,7 @@ export const useHomeStore = defineStore("homeStore", () => {
     }
   };
 
+  //get data from data source
   async function getAllProduct() {
     if (isInitial.value) {
       const result = await productDataSource.getAllProduct(page.value);
